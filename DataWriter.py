@@ -16,9 +16,3 @@ class DataWriter:
             writer.writerow(["Product Name", "Price", "Rating", "No. of reviews", "Buy link"])
             writer.writerows(data)
 
-# dd = [ ['2','3','4','3','2','3','3'] , [23,34,2,2] , ['jayant']]
-
-# d = DataWriter()
-
-# d.writer(dd)
-
