@@ -50,7 +50,12 @@ class Olx(DataWriter):
             # Date 
             date = item.find('span', class_='zLvFQ').text
 
-            d = (title, price, loc, date)
+            # Buy link
+            parent = item.find('a', class_='fhlkh')
+            link = parent['href']
+            link = 'https://www.olx.in' + link
+
+            d = (title, price, loc, date, link)
             self.details.append(d)
 
 
