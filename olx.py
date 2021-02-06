@@ -2,7 +2,9 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 
-class Olx:
+from DataWriter import DataWriter
+
+class Olx(DataWriter):
 
     name = ''
     details = []
@@ -53,10 +55,7 @@ class Olx:
 
 
     def store_data(self):
-        with open('olx.csv', 'w', newline='', encoding='utf-8') as file:
-            writer = csv.writer(file)
-            writer.writerow(['Title', 'Price', 'Location', 'Date'])
-            writer.writerows(self.details)
 
-            # print("\n\nOlx data successfully fetched and stored...")
-    
+            w = DataWriter('OLX.csv')
+
+            w.writer(self.details)

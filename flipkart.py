@@ -2,7 +2,9 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 
-class Flipkart:
+from DataWriter import DataWriter
+
+class Flipkart(DataWriter):
 
     name = ''
     details = []
@@ -113,13 +115,6 @@ class Flipkart:
             
 
     def store_data(self):
-        with open('flipkart.csv', 'w', newline='', encoding='utf-8') as file:
-            writer = csv.writer(file)
-            writer.writerow(['Product title', 'Product price' 'Product rating', 'Reviews count', 'Buy link'])
-            writer.writerows(self.details)
 
-        # print("\n\nFlipkart data successfully fetched and stored...")
-
-
-
-# print("\n\n-------------------------------------------------------------------Data fetched successfully-------------------------------------------------------------------\n\n")
+        w = DataWriter("Flipkart.csv")
+        w.writer(self.details)

@@ -2,8 +2,9 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 
+from DataWriter import DataWriter
 
-class Amazon:
+class Amazon(DataWriter):
 
     name = ''
     details = []
@@ -132,9 +133,7 @@ class Amazon:
 
 
     def store_data(self):
-        with open('amazon.csv', 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
-            writer.writerow(['Title', 'Price', 'Rating', 'Reviews', 'Delivery date', 'Delivery type', 'Product link'])
-            writer.writerows(self.details)
 
+        w = DataWriter('Amazon.csv')
+        w.writer(self.details)
         
