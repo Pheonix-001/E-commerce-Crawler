@@ -137,8 +137,4 @@ class Amazon:
             writer.writerow(['Title', 'Price', 'Rating', 'Reviews', 'Delivery date', 'Delivery type', 'Product link'])
             writer.writerows(self.details)
 
-            # print("\n\nAmazon data successfully fetched and stored...")
-
-
-
-# print("\n\n-------------------------------------------------------------------Amazon Data fetched successfully-------------------------------------------------------------------\n\n")
+        
