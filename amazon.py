@@ -9,10 +9,12 @@ class Amazon(DataWriter):
     name = ''
     details = []
     
+    # Take product name using constructor
     def __init__(self, name):
         self.name = name
     
 
+    # Generate url
     def get_url(self):
 
         self.name = self.name.replace(' ', '+')
@@ -23,6 +25,7 @@ class Amazon(DataWriter):
         return url
 
 
+    # Fetch all pages for a particular search and store into a 'page_list' list
     def get_pages(self):
         page_list = []
         temp = self.get_url()
@@ -43,6 +46,7 @@ class Amazon(DataWriter):
         return page_list
 
 
+    # Generate soup for a particular url
     def get_soup(self, url):
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36'
@@ -52,6 +56,7 @@ class Amazon(DataWriter):
         return soup
 
 
+    # Fetch all items from a page and store into a 'items' list
     def get_items(self):
         items = []
         page = self.get_pages()
@@ -65,6 +70,7 @@ class Amazon(DataWriter):
         return(items)
 
 
+    # It fetch all products details and store into a 'details' list
     def get_details(self):
         print("\n Fetching data on Amazon.in...")
         items = self.get_items()
@@ -112,6 +118,7 @@ class Amazon(DataWriter):
                 p_delivery_date = 'delivery date not available'
 
             # Delivery type
+            # Using multiple try-catch for different types of tags
             try:
                 delivery_type = item.find('span', {"aria-label": "FREE Delivery by Amazon"})
                 p_delivery_type = delivery_type.text.strip()
@@ -132,8 +139,10 @@ class Amazon(DataWriter):
             self.details.append(d)
 
 
+    # Store all prducts details into a CSV file
     def store_data(self):
 
-        w = DataWriter('Amazon.csv')
+        rowtitle = ["Product Name", "Price", "Rating", "No. of reviews", "Delivery Date", "Delivery Type", "Buy link"]
+        w = DataWriter('Amazon.csv', rowtitle)
         w.writer(self.details)
         

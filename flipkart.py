@@ -9,10 +9,12 @@ class Flipkart(DataWriter):
     name = ''
     details = []
 
+    # Taking product name by using a constructor
     def __init__(self, name):
         self.name = name
 
 
+    # Generate a url
     def get_url(self):
         fname = self.name
         fname = fname.replace(' ', '%20')
@@ -22,6 +24,7 @@ class Flipkart(DataWriter):
         return url
 
 
+    # Generate soup for a given url
     def get_soup(self, url):
         url = self.get_url()
         headers = {
@@ -32,6 +35,7 @@ class Flipkart(DataWriter):
         return soup
 
 
+    # Fetch all products details from first type of page
     def get_details(self):
         print("\n Fetching data on Flipkart.in ...")
         page = self.get_url()
@@ -76,6 +80,7 @@ class Flipkart(DataWriter):
             self.details.append(d)
 
 
+    # It fetch products details from second type of page
     def get_data(self, page):
         soup = self.get_soup(page)
         items = soup.find_all('div', class_='_4ddWXP')
@@ -114,7 +119,9 @@ class Flipkart(DataWriter):
             self.details.append(d)
             
 
+    # Store fetched data into a CSV file
     def store_data(self):
 
-        w = DataWriter("Flipkart.csv")
+        rowtitle = ["Product Name", "Price", "Rating", "No. of reviews", "Buy link"]
+        w = DataWriter("Flipkart.csv", rowtitle)
         w.writer(self.details)

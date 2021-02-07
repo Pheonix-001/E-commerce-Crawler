@@ -9,10 +9,12 @@ class Olx(DataWriter):
     name = ''
     details = []
 
+    # Taking product name using constructor
     def __init__(self, name):
         self.name = name
 
     
+    # Generate url
     def get_url(self):
         fname = self.name
         fname = fname.replace(' ', '-')
@@ -21,6 +23,7 @@ class Olx(DataWriter):
         return url
 
 
+    # Generate soup for given url
     def get_soup(self):
         url = self.get_url()
         headers = {
@@ -31,6 +34,7 @@ class Olx(DataWriter):
         return soup
 
 
+    # Fetch all products details and store into a list
     def get_details(self):
         print("\n Fetching data on Olx.in...")
         soup = self.get_soup()
@@ -51,7 +55,7 @@ class Olx(DataWriter):
             date = item.find('span', class_='zLvFQ').text
 
             # Buy link
-            parent = item.find('a', class_='fhlkh')
+            parent = item.a
             link = parent['href']
             link = 'https://www.olx.in' + link
 
@@ -59,8 +63,9 @@ class Olx(DataWriter):
             self.details.append(d)
 
 
+    # Store data into CSV file
     def store_data(self):
 
-            w = DataWriter('OLX.csv')
-
+            rowtitle = ["Product Name", "Price", "Location", "Add post date", "Buy link"]
+            w = DataWriter('OLX.csv', rowtitle)
             w.writer(self.details)
