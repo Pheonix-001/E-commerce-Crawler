@@ -1,10 +1,11 @@
 # E-commerce-Crawler using Python
 
-required language - Python
+Used Language - Python
 
-python libraries - requests, BeautifulSoup, csv, matplotlib
+Used Libraries - requests, BeautifulSoup, csv, matplotlib
 
 A e-commerce crawler (internet bot) that fetch data from multiple e-commerce websites (like Amazon.in, Flipkart.in, OLX.in).
 
-and store into CSV(Comma-Separated Values) files.
+Store fetched data into CSV(Comma-Separated Values) files.
 
+Then compare searched product's price and show compared price on a bar graph...
